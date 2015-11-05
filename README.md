@@ -75,7 +75,8 @@ The API you build should have the following capabilities. The schema of your dat
 - Install Maven:
   - `brew install maven`
 - In IntelliJ, Import a project (you can do this from the first screen when IntelliJ loads)
-  - Select the pom.xml file in this project to import.
+  - If you need to get there from an open project, go to File -> Close Project
+  - Select the pom.xml file in this project to import.  Leave the settings as default.
 - Once the project loads, select Make Project from the Build menu to make sure everything builds.
 - To set up debugging:
   - From the menu, choose Run -> Edit Configurations...
