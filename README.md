@@ -69,3 +69,27 @@ The API you build should have the following capabilities. The schema of your dat
 - All endpoints must be tested.
 - We will use [JUnit](http://junit.org/) for tests.
 - There isn't a coverage requirement for this project, beyond demonstrating that every endpoint is covered by some manner of tests.
+
+### Building and Running
+
+- Install Maven:
+  - `brew install maven`
+- In IntelliJ, Import a project (you can do this from the first screen when IntelliJ loads)
+  - Select the pom.xml file in this project to import.
+- Once the project loads, select Make Project from the Build menu to make sure everything builds.
+- To set up debugging:
+  - From the menu, choose Run -> Edit Configurations...
+  - Press the + button at the top left, then choose "Remote"
+  - On the configuration tab that comes up on the right, leave Host as localhost and change port to 8000.
+  - At the top of the dialog name this configuration something like "DebugTomcat"
+  - Press OK
+- To run the server:
+  - Open a terminal at the root folder of this project.
+  - `mvn tomcat:run`
+  - Go to http://localhost/VideoStoreAPI/foo/name
+- To debug the server:
+  - Set breakpoints
+  - Open a terminal at the root folder of this project.
+  - `mvnDebug tomcat:run`
+  - Make sure your run configuration in the dropdown at the top right is "DebugTomcat" or whatever you named your debug configuraiton, then press the bug button.
+  - Go to http://localhost/VideoStoreAPI/foo/name and verify your breakpoints.
