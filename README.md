@@ -87,7 +87,7 @@ The API you build should have the following capabilities. The schema of your dat
 - To run the server:
   - Open a terminal at the root folder of this project.
   - `mvn tomcat:run`
-  - Go to http://localhost/VideoStoreAPI/foo/name
+  - Go to http://localhost:8080/VideoStoreAPI/foo/name
 - To debug the server:
   - Set breakpoints
   - Open a terminal at the root folder of this project.
