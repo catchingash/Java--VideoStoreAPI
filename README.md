@@ -42,8 +42,8 @@ The API you build should have the following capabilities. The schema of your dat
 - There is not an authentication requirement for this project; assume all users interacting with the API are video store employees.
 
 ### Customers
-- Retrive a list of all customers
-- Retrive a subset of customers
+- Retrive a list of all customers ("/customers/index")
+- Retrive a subset of customers ("customers/index?sort=____")
   - Given a sort column, return _n_ customer records
   - Sort columns are
     - `name`
@@ -94,3 +94,6 @@ The API you build should have the following capabilities. The schema of your dat
   - `mvnDebug tomcat:run`
   - Make sure your run configuration in the dropdown at the top right is "DebugTomcat" or whatever you named your debug configuraiton, then press the bug button.
   - Go to http://localhost/VideoStoreAPI/foo/name and verify your breakpoints.
+
+#### Dependencies
+- [postgresql-9.4-1205-jdbc41.jar](https://jdbc.postgresql.org/download.html)
