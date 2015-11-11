@@ -1,4 +1,4 @@
-package org.adadevelopersacademy.videostoreapi;
+package org.adadevelopersacademy.videostoreapi.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,11 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/")
 public class HelloController {
-	public class Video {
-		public String title;
-	}
 
-	@RequestMapping("/foo/{name}")
+    @RequestMapping("/foo/{name}")
 	public String printWelcome(ModelMap model, @PathVariable String name, @RequestParam(required=false, defaultValue="") String age) {
 
 		model.addAttribute("message", name + age);
