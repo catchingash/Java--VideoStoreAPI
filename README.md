@@ -66,9 +66,7 @@ The API you build should have the following capabilities. The schema of your dat
 - This part of the project is purely an API; all interactions should happen over HTTP requests. There is no front-end, user-facing interface.
 
 ### Testing
-- All endpoints must be tested.
 - We will use [JUnit](http://junit.org/) for tests.
-- There isn't a coverage requirement for this project, beyond demonstrating that every endpoint is covered by some manner of tests.
 
 ### Building and Running
 
