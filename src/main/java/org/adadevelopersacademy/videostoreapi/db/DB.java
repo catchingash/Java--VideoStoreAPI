@@ -45,4 +45,57 @@ public class DB {
             }
         }
     }
+
+    public static CachedRowSet executeQuery(
+            @NotNull final String query,
+            @Nullable Connection conn
+    ) {
+        Statement stmt = null;
+        ResultSet res = null;
+        CachedRowSet rows = null;
+
+        try {
+            // load JDBC Postgresql driver
+            // FIXME: does this need to be inside the `if (conn == null)` block?
+            Class.forName("org.postgresql.Driver");
+
+            if (conn == null) {
+                // establish connection to the database
+                conn = DriverManager.getConnection(
+                        "jdbc:postgresql:java_videoapi_dev",
+                        "java_videoapi",
+                        "SuperSecurePassword01");
+            }
+
+            // execute query
+            stmt = conn.createStatement();
+            res = stmt.executeQuery(query);
+            rows = new CachedRowSetImpl();
+            rows.populate(res);
+        } catch (final Exception e) {
+            // handle errors for Class.forName
+            System.err.println("Got an exception!");
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // close resources
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+                if (res != null) {
+                    res.close();
+                }
+            } catch (SQLException se) {
+                // handle errors for closing db connection
+                se.printStackTrace();
+            }
+        }
+
+        return rows;
+    }
+
 }
