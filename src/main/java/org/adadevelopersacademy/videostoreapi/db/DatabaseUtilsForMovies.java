@@ -12,11 +12,10 @@ public class DatabaseUtilsForMovies {
     public static Movie findByID(
             @NotNull final int id
     ) {
-        final CachedRowSet res;
         Movie movie = null;
         final String query = "SELECT movies.* FROM movies " +
                 "WHERE movies.id = " + id;
-        res = DB.executeQuery(query, null);
+        final CachedRowSet res = DB.executeQuery(query, null);
 
         if (res != null) {
             try {
@@ -37,13 +36,12 @@ public class DatabaseUtilsForMovies {
     }
 
     public static Movie findByTitle(
-            final String title
+            @NotNull final String title
     ) {
-        final CachedRowSet res;
         Movie movie = null;
         final String query = "SELECT movies.* FROM movies " +
                 "WHERE TITLE = '" + title + "'";
-        res = DB.executeQuery(query, null);
+        final CachedRowSet res = DB.executeQuery(query, null);
 
         if (res != null) {
             try {
@@ -66,8 +64,8 @@ public class DatabaseUtilsForMovies {
     // QUESTION: MOVE INTO THE CONTROLLER??
     public static List<Movie> all() {
         List<Movie> movies = new ArrayList<Movie>();
-        String query = "SELECT movies.* FROM movies";
-        CachedRowSet res = DB.executeQuery(query, null);
+        final String query = "SELECT movies.* FROM movies";
+        final CachedRowSet res = DB.executeQuery(query, null);
 
         if (res != null) {
             try {
