@@ -1,6 +1,5 @@
 package org.adadevelopersacademy.videostoreapi.db;
 
-import com.sun.istack.internal.NotNull;
 import org.adadevelopersacademy.videostoreapi.models.Movie;
 
 import javax.sql.rowset.CachedRowSet;
@@ -10,7 +9,7 @@ import java.util.List;
 
 public class DatabaseUtilsForMovies {
     public static Movie findByID(
-            @NotNull final int id
+            final int id
     ) {
         Movie movie = null;
         final String query = "SELECT movies.* FROM movies " +
@@ -36,7 +35,7 @@ public class DatabaseUtilsForMovies {
     }
 
     public static Movie findByTitle(
-            @NotNull final String title
+            final String title
     ) {
         Movie movie = null;
         final String query = "SELECT movies.* FROM movies " +

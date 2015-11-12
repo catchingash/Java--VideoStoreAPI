@@ -1,7 +1,5 @@
 package org.adadevelopersacademy.videostoreapi.db;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import com.sun.rowset.CachedRowSetImpl;
 
 import javax.sql.rowset.CachedRowSet;
@@ -10,7 +8,7 @@ import java.sql.*;
 //  Establish a connection to a Postgres database using JDBC
 public class DB {
     public static void executeUpdate(
-            @NotNull final String query
+            final String query
     ) {
         Statement stmt = null;
         Connection conn = null;
@@ -47,8 +45,8 @@ public class DB {
     }
 
     public static CachedRowSet executeQuery(
-            @NotNull final String query,
-            @Nullable Connection conn
+            final String query,
+            Connection conn
     ) {
         Statement stmt = null;
         ResultSet res = null;
