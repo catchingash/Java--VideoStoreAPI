@@ -42,7 +42,7 @@ public class DatabaseUtilsForMovies {
                 "WHERE TITLE = '" + title + "'";
         final CachedRowSet res = DB.executeQuery(query, null);
 
-        if (res != null) {
+        if (res != null && res.size() > 0) {
             try {
                 res.next();
                 movie = new Movie(
