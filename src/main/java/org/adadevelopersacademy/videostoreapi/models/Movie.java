@@ -2,7 +2,7 @@ package org.adadevelopersacademy.videostoreapi.models;
 
 public class Movie {
     // public fields will be displayed in returned JSON
-    public final int id;
+    private final int id;
     public String title;
     public String overview;
     public String releaseDate;
