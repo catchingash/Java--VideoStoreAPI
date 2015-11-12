@@ -92,6 +92,3 @@ The API you build should have the following capabilities. The schema of your dat
   - `mvnDebug tomcat:run`
   - Make sure your run configuration in the dropdown at the top right is "DebugTomcat" or whatever you named your debug configuraiton, then press the bug button.
   - Go to http://localhost/VideoStoreAPI/foo/name and verify your breakpoints.
-
-#### Dependencies
-- [postgresql-9.4-1205-jdbc41.jar](https://jdbc.postgresql.org/download.html)
