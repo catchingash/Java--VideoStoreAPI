@@ -3,4 +3,3 @@ target/
 .idea/
 *.iml
 notes/
-src/main/webapp/WEB-INF/lib/
