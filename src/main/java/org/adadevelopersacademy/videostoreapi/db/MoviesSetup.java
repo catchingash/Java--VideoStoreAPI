@@ -1,5 +1,12 @@
 package org.adadevelopersacademy.videostoreapi.db;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class MoviesSetup {
     public static void dropTable() {
         System.out.println("Dropping movies table...");
@@ -19,11 +26,30 @@ public class MoviesSetup {
     }
 
     public static void seedTable() {
-        // FIXME: Need to re-write so that it'll seed from the JSON file.
-        final String query = "INSERT INTO movies (title, overview, releaseDate, inventory) " +
-                "VALUES ('Woof', 'A movie about a dog', 'Nov 24, 2015', 5)";
         System.out.println("Seeding movies table...");
-        DB.executeUpdate(query);
+        try {
+            final ObjectMapper mapper = new ObjectMapper();
+            final List<Map<String, Object>> movieList =
+                    mapper.readValue(
+                            new File("./src/main/java/org/adadevelopersacademy/videostoreapi/db/seeds/movies.json"),
+                            List.class
+                    );
+
+            for (Map<String, Object> movieData : movieList) {
+                Map<String, Object> params = new HashMap<String, Object>();
+                params.put("title", movieData.get("title"));
+                params.put("overview", movieData.get("overview"));
+                params.put("releaseDate", movieData.get("release_date"));
+                params.put("inventory", movieData.get("inventory"));
+
+                DatabaseUtilsForMovies.create(params);
+            }
+        } catch (Exception e) {
+            // handle errors for Class.forName
+            System.err.println("Got an exception!");
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

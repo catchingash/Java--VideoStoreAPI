@@ -9,6 +9,20 @@ import java.util.List;
 import java.util.Map;
 
 public class DatabaseUtilsForMovies {
+    public static boolean create(
+            final Map params
+    ) {
+        final String query = "INSERT INTO movies " +
+                "(title, overview, releaseDate, inventory) " +
+                "VALUES (?, ?, ?, ?)";
+        List<Object> values = new ArrayList<Object>();
+        values.add(params.get("title"));
+        values.add(params.get("overview"));
+        values.add(params.get("releaseDate"));
+        values.add(params.get("inventory"));
+        return DB.executeUpdate(query, values, null);
+    }
+
     public static Movie findByID(
             final int id
     ) {
