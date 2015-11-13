@@ -4,35 +4,55 @@ import com.sun.rowset.CachedRowSetImpl;
 
 import javax.sql.rowset.CachedRowSet;
 import java.sql.*;
+import java.util.List;
 
 //  Establish a connection to a Postgres database using JDBC
 public class DB {
-    public static void executeUpdate(
-            final String query
+    public static boolean executeUpdate(
+            final String query,
+            final List<Object> params,
+            Connection conn
     ) {
-        Statement stmt = null;
-        Connection conn = null;
+        PreparedStatement stmt = null;
+        boolean success = false;
         try {
             // load JDBC Postgresql driver
+            // FIXME: does this need to be inside the `if (conn == null)` block?
             Class.forName("org.postgresql.Driver");
 
-            // establish connection to the database
-            final String url = "jdbc:postgresql:java_videoapi_dev";
-            conn = DriverManager.getConnection(url, "java_videoapi", "SuperSecurePassword01");
+            // NOTE: allowing conn to be passed in for testing purposes
+            if (conn == null) {
+                // establish connection to the database
+                conn = DriverManager.getConnection(
+                        "jdbc:postgresql:java_videoapi_dev",
+                        "java_videoapi",
+                        "SuperSecurePassword01");
+            }
+
 
             // execute query
-            stmt = conn.createStatement();
-            stmt.executeUpdate(query);
+            stmt = conn.prepareStatement(query);
+            if (params != null) {
+                int i = 1;
+                for (Object param : params) {
+                    stmt.setObject(i, param);
+                    i++;
+                }
+            }
+            stmt.executeUpdate();
+            success = true;
         } catch (final Exception e) {
             // handle errors for Class.forName
             System.err.println("Got an exception!");
             System.err.println(e.getMessage());
+            System.err.println("Query: ");
+            System.err.println(query);
             e.printStackTrace();
         } finally {
             // close resources
             try {
                 if (stmt != null) {
-                    conn.close();
+                    stmt.close();
                 }
                 if (conn != null) {
                     conn.close();
@@ -42,13 +62,16 @@ public class DB {
                 se.printStackTrace();
             }
         }
+
+        return success;
     }
 
     public static CachedRowSet executeQuery(
             final String query,
+            final List<Object> params,
             Connection conn
     ) {
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         ResultSet res = null;
         CachedRowSet rows = null;
 
@@ -57,6 +80,7 @@ public class DB {
             // FIXME: does this need to be inside the `if (conn == null)` block?
             Class.forName("org.postgresql.Driver");
 
+            // NOTE: allowing conn to be passed in for testing purposes
             if (conn == null) {
                 // establish connection to the database
                 conn = DriverManager.getConnection(
@@ -66,8 +90,15 @@ public class DB {
             }
 
             // execute query
-            stmt = conn.createStatement();
-            res = stmt.executeQuery(query);
+            stmt = conn.prepareStatement(query);
+            if (params != null) {
+                int i = 1;
+                for (Object param : params) {
+                    stmt.setObject(i, param);
+                    i++;
+                }
+            }
+            res = stmt.executeQuery();
             rows = new CachedRowSetImpl();
             rows.populate(res);
         } catch (final Exception e) {

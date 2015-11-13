@@ -2,20 +2,20 @@ package org.adadevelopersacademy.videostoreapi.db;
 
 public class MoviesSetup {
     public static void dropTable() {
-        final String query = "DROP TABLE IF EXISTS movies";
         System.out.println("Dropping movies table...");
-        DB.executeUpdate(query);
+        final String query = "DROP TABLE IF EXISTS movies";
+        DB.executeUpdate(query, null, null);
     }
 
     public static void createTable() {
+        System.out.println("Creating movies table...");
         final String query = "CREATE TABLE IF NOT EXISTS movies " +
                 "(id SERIAL UNIQUE, " +
                 "title TEXT, " +
                 "overview TEXT, " +
                 "releaseDate TEXT, " +
                 "inventory INTEGER)";
-        System.out.println("Creating movies table...");
-        DB.executeUpdate(query);
+        DB.executeUpdate(query, null, null);
     }
 
     public static void seedTable() {

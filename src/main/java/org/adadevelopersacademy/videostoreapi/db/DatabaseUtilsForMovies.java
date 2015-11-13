@@ -6,15 +6,18 @@ import javax.sql.rowset.CachedRowSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DatabaseUtilsForMovies {
     public static Movie findByID(
             final int id
     ) {
         Movie movie = null;
-        final String query = "SELECT movies.* FROM movies " +
-                "WHERE movies.id = " + id;
-        final CachedRowSet res = DB.executeQuery(query, null);
+        final String query = "SELECT * FROM movies " +
+                "WHERE id = ?";
+        List<Object> params = new ArrayList<Object>();
+        params.add(id);
+        final CachedRowSet res = DB.executeQuery(query, params, null);
 
         if (res != null) {
             try {
@@ -38,9 +41,11 @@ public class DatabaseUtilsForMovies {
             final String title
     ) {
         Movie movie = null;
-        final String query = "SELECT movies.* FROM movies " +
-                "WHERE TITLE = '" + title + "'";
-        final CachedRowSet res = DB.executeQuery(query, null);
+        final String query = "SELECT * FROM movies " +
+                "WHERE title = ?";
+        List<Object> params = new ArrayList<Object>();
+        params.add(title);
+        final CachedRowSet res = DB.executeQuery(query, params, null);
 
         if (res != null && res.size() > 0) {
             try {
@@ -60,13 +65,12 @@ public class DatabaseUtilsForMovies {
         return movie;
     }
 
-    // QUESTION: MOVE INTO THE CONTROLLER??
     public static List<Movie> all() {
         List<Movie> movies = new ArrayList<Movie>();
-        final String query = "SELECT movies.* FROM movies";
-        final CachedRowSet res = DB.executeQuery(query, null);
+        final String query = "SELECT * FROM movies";
+        final CachedRowSet res = DB.executeQuery(query, null, null);
 
-        if (res != null) {
+        if (res != null && res.size() > 0) {
             try {
                 while (res.next()) {
                     Movie movie = new Movie(
@@ -89,8 +93,8 @@ public class DatabaseUtilsForMovies {
     public static void main(
             final String[] args
     ) {
-        System.out.println(findByID(1));
-        System.out.println(findByTitle("Woof"));
-        System.out.println(all());
+//        System.out.println(findByID(1));
+//        System.out.println(findByTitle("Psycho"));
+//        System.out.println(all());
     }
 }
