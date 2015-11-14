@@ -1,6 +1,8 @@
 package org.adadevelopersacademy.videostoreapi.db;
 
 import org.adadevelopersacademy.videostoreapi.models.Movie;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.annotation.Rollback;
 
@@ -35,10 +37,15 @@ public class DatabaseUtilsForMoviesTest {
         DB.executeUpdate("TRUNCATE movies RESTART IDENTITY", null, null);
     }
 
+    @Before
+    @After
+    public void setup() {
+        truncateMovies();
+    }
+
     @Test
     @Rollback // FIXME: this isn't doing what I'd hoped. Why?
     public void testCreateAddsNewRecord() {
-        truncateMovies();
         DatabaseUtilsForMovies.create(movieParams());
         CachedRowSet movies = DB.executeQuery("SELECT * from movies", null, null);
         assertThat(movies.size(), is(1));
@@ -47,7 +54,6 @@ public class DatabaseUtilsForMoviesTest {
     @Test
     @Rollback
     public void testFindByIdReturnsMovie() {
-        truncateMovies();
         DatabaseUtilsForMovies.create(movieParams());
         assertThat(DatabaseUtilsForMovies.findByID(1), instanceOf(Movie.class));
         assertThat(DatabaseUtilsForMovies.findByID(1).title, is(title));
@@ -56,14 +62,12 @@ public class DatabaseUtilsForMoviesTest {
     @Test
     @Rollback
     public void testFindByIdReturnsNullIfCantFindMovie() {
-        truncateMovies();
         assertNull(DatabaseUtilsForMovies.findByID(1));
     }
 
     @Test
     @Rollback
     public void testFindByTitleReturnsMovie() {
-        truncateMovies();
         DatabaseUtilsForMovies.create(movieParams());
         assertThat(DatabaseUtilsForMovies.findByTitle(title), instanceOf(Movie.class));
         assertThat(DatabaseUtilsForMovies.findByTitle(title).title, is(title));
@@ -72,14 +76,12 @@ public class DatabaseUtilsForMoviesTest {
     @Test
     @Rollback
     public void testFindByTitleReturnsNullIfCantFindMovie() {
-        truncateMovies();
         assertNull(DatabaseUtilsForMovies.findByTitle("IAmNotATitle"));
     }
 
     @Test
     @Rollback
     public void testAllReturnsAllMovies() {
-        truncateMovies();
         int count = 3;
 
         for (int i = 0; i < count; i++) {
@@ -93,7 +95,6 @@ public class DatabaseUtilsForMoviesTest {
     @Test
     @Rollback
     public void testAllReturnsEmptyListIfNoMovies() {
-        truncateMovies();
         assertThat(DatabaseUtilsForMovies.all(), instanceOf(List.class));
         assertThat(DatabaseUtilsForMovies.all().size(), is(0));
     }
