@@ -29,7 +29,6 @@ public class DB {
                         "SuperSecurePassword01");
             }
 
-
             // execute query
             stmt = conn.prepareStatement(query);
             if (params != null) {

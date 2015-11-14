@@ -33,7 +33,7 @@ public class DatabaseUtilsForMovies {
         params.add(id);
         final CachedRowSet res = DB.executeQuery(query, params, null);
 
-        if (res != null) {
+        if (res != null && res.size() > 0) {
             try {
                 res.next();
                 movie = new Movie(
@@ -102,13 +102,5 @@ public class DatabaseUtilsForMovies {
             }
         }
         return movies;
-    }
-
-    public static void main(
-            final String[] args
-    ) {
-//        System.out.println(findByID(1));
-//        System.out.println(findByTitle("Psycho"));
-//        System.out.println(all());
     }
 }
