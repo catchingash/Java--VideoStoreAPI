@@ -15,7 +15,7 @@ public class DatabaseUtilsForMovies {
         final String query = "INSERT INTO movies " +
                 "(title, overview, releaseDate, inventory) " +
                 "VALUES (?, ?, ?, ?)";
-        List<Object> values = new ArrayList<Object>();
+        final List<Object> values = new ArrayList<Object>();
         values.add(params.get("title"));
         values.add(params.get("overview"));
         values.add(params.get("releaseDate"));
@@ -29,7 +29,7 @@ public class DatabaseUtilsForMovies {
         Movie movie = null;
         final String query = "SELECT * FROM movies " +
                 "WHERE id = ?";
-        List<Object> params = new ArrayList<Object>();
+        final List<Object> params = new ArrayList<Object>();
         params.add(id);
         final CachedRowSet res = DB.executeQuery(query, params, null);
 
@@ -57,7 +57,7 @@ public class DatabaseUtilsForMovies {
         Movie movie = null;
         final String query = "SELECT * FROM movies " +
                 "WHERE title = ?";
-        List<Object> params = new ArrayList<Object>();
+        final List<Object> params = new ArrayList<Object>();
         params.add(title);
         final CachedRowSet res = DB.executeQuery(query, params, null);
 
@@ -80,7 +80,7 @@ public class DatabaseUtilsForMovies {
     }
 
     public static List<Movie> all() {
-        List<Movie> movies = new ArrayList<Movie>();
+        final List<Movie> movies = new ArrayList<Movie>();
         final String query = "SELECT * FROM movies";
         final CachedRowSet res = DB.executeQuery(query, null, null);
 
