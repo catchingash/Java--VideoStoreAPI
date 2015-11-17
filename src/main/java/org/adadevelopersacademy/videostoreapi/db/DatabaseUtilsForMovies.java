@@ -36,13 +36,13 @@ public class DatabaseUtilsForMovies {
         if (res != null && res.size() > 0) {
             try {
                 res.next();
-                movie = new Movie(
-                        res.getInt("id"),
-                        res.getString("title"),
-                        res.getString("overview"),
-                        res.getString("releaseDate"),
-                        res.getInt("inventory")
-                );
+                movie = new Movie.MovieBuilder()
+                        .id(res.getInt("id"))
+                        .title(res.getString("title"))
+                        .overview(res.getString("overview"))
+                        .releaseDate(res.getString("releaseDate"))
+                        .inventory(res.getInt("inventory"))
+                        .build();
             } catch (final SQLException e) {
                 e.printStackTrace();
             }
@@ -64,13 +64,13 @@ public class DatabaseUtilsForMovies {
         if (res != null && res.size() > 0) {
             try {
                 res.next();
-                movie = new Movie(
-                        res.getInt("id"),
-                        res.getString("title"),
-                        res.getString("overview"),
-                        res.getString("releaseDate"),
-                        res.getInt("inventory")
-                );
+                movie = new Movie.MovieBuilder()
+                        .id(res.getInt("id"))
+                        .title(res.getString("title"))
+                        .overview(res.getString("overview"))
+                        .releaseDate(res.getString("releaseDate"))
+                        .inventory(res.getInt("inventory"))
+                        .build();
             } catch (final SQLException e) {
                 e.printStackTrace();
             }
@@ -87,13 +87,13 @@ public class DatabaseUtilsForMovies {
         if (res != null && res.size() > 0) {
             try {
                 while (res.next()) {
-                    Movie movie = new Movie(
-                            res.getInt("id"),
-                            res.getString("title"),
-                            res.getString("overview"),
-                            res.getString("releaseDate"),
-                            res.getInt("inventory")
-                    );
+                    final Movie movie = new Movie.MovieBuilder()
+                            .id(res.getInt("id"))
+                            .title(res.getString("title"))
+                            .overview(res.getString("overview"))
+                            .releaseDate(res.getString("releaseDate"))
+                            .inventory(res.getInt("inventory"))
+                            .build();
 
                     movies.add(movie);
                 }

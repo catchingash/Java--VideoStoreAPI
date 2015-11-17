@@ -2,23 +2,17 @@ package org.adadevelopersacademy.videostoreapi.models;
 
 public class Movie {
     private final int id;
-    private String title;
-    private String overview;
-    private String releaseDate;
-    private int inventory;
+    private final String title;
+    private final String overview;
+    private final String releaseDate;
+    private final int inventory;
 
-    public Movie(
-            int id,
-            String title,
-            String overview,
-            String releaseDate,
-            int inventory
-    ) {
-        this.id = id;
-        this.title = title;
-        this.overview = overview;
-        this.releaseDate = releaseDate;
-        this.inventory = inventory;
+    private Movie(MovieBuilder builder) {
+        this.id = builder.id;
+        this.title = builder.title;
+        this.overview = builder.overview;
+        this.releaseDate = builder.releaseDate;
+        this.inventory = builder.inventory;
     }
 
     public String getTitle() {
@@ -35,5 +29,44 @@ public class Movie {
 
     public int getInventory() {
         return inventory;
+    }
+
+    public static class MovieBuilder {
+        private int id;
+        private String title;
+        private String overview;
+        private String releaseDate;
+        private int inventory;
+
+        public MovieBuilder() {}
+
+        public MovieBuilder id(final int id) {
+            this.id = id;
+            return this;
+        }
+
+        public MovieBuilder title(final String title) {
+            this.title = title;
+            return this;
+        }
+
+        public MovieBuilder overview(final String overview) {
+            this.overview = overview;
+            return this;
+        }
+
+        public MovieBuilder releaseDate(final String releaseDate) {
+            this.releaseDate = releaseDate;
+            return this;
+        }
+
+        public MovieBuilder inventory(final int inventory) {
+            this.inventory = inventory;
+            return this;
+        }
+
+        public Movie build() {
+            return new Movie(this);
+        }
     }
 }
