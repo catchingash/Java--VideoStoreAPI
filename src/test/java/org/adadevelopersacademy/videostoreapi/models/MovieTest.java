@@ -6,25 +6,31 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class MovieTest {
-    private final Movie movie = new Movie(1, "Title", "Overview", "Release Date", 12);
+    private final Movie movie = new Movie.MovieBuilder()
+            .id(1)
+            .title("Title")
+            .overview("Overview")
+            .releaseDate("Release Date")
+            .inventory(12)
+            .build();
     @Test
     public void testTitleFieldIsPublic() {
-        assertThat(movie.title, is("Title"));
+        assertThat(movie.getTitle(), is("Title"));
     }
 
     @Test
     public void testOverviewFieldIsPublic() {
-        assertThat(movie.overview, is("Overview"));
+        assertThat(movie.getOverview(), is("Overview"));
     }
 
     @Test
     public void testReleaseDateFieldIsPublic() {
-        assertThat(movie.releaseDate, is("Release Date"));
+        assertThat(movie.getReleaseDate(), is("Release Date"));
     }
 
     @Test
     public void testInventoryFieldIsPublic() {
-        assertThat(movie.inventory, is(12));
+        assertThat(movie.getInventory(), is(12));
     }
 
 //    @Test(expected = Exception.class)

@@ -56,7 +56,7 @@ public class DatabaseUtilsForMoviesTest {
     public void testFindByIdReturnsMovie() {
         DatabaseUtilsForMovies.create(movieParams());
         assertThat(DatabaseUtilsForMovies.findByID(1), instanceOf(Movie.class));
-        assertThat(DatabaseUtilsForMovies.findByID(1).title, is(title));
+        assertThat(DatabaseUtilsForMovies.findByID(1).getTitle(), is(title));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class DatabaseUtilsForMoviesTest {
     public void testFindByTitleReturnsMovie() {
         DatabaseUtilsForMovies.create(movieParams());
         assertThat(DatabaseUtilsForMovies.findByTitle(title), instanceOf(Movie.class));
-        assertThat(DatabaseUtilsForMovies.findByTitle(title).title, is(title));
+        assertThat(DatabaseUtilsForMovies.findByTitle(title).getTitle(), is(title));
     }
 
     @Test
