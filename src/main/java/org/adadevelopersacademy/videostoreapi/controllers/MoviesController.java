@@ -16,7 +16,7 @@ import java.util.List;
 public class MoviesController {
     @RequestMapping("/{title}")
     public @ResponseBody Movie show(
-            @PathVariable String title
+            @PathVariable final String title
     ) {
         // returns an empty(?) response if movie was not found
         return DatabaseUtilsForMovies.findByTitle(title);

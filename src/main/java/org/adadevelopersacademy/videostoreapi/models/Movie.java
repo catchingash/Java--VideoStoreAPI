@@ -7,12 +7,21 @@ public class Movie {
     private final String releaseDate;
     private final int inventory;
 
-    private Movie(MovieBuilder builder) {
-        this.id = builder.id;
-        this.title = builder.title;
-        this.overview = builder.overview;
-        this.releaseDate = builder.releaseDate;
-        this.inventory = builder.inventory;
+    private Movie(
+            final int id,
+            final String title,
+            final String overview,
+            final String releaseDate,
+            final int inventory) {
+        this.id = id;
+        this.title = title;
+        this.overview = overview;
+        this.releaseDate = releaseDate;
+        this.inventory = inventory;
+    }
+
+    public static MovieBuilder getBuilder() {
+        return new MovieBuilder();
     }
 
     public String getTitle() {
@@ -66,7 +75,12 @@ public class Movie {
         }
 
         public Movie build() {
-            return new Movie(this);
+            return new Movie(
+                    this.id,
+                    this.title,
+                    this.overview,
+                    this.releaseDate,
+                    this.inventory);
         }
     }
 }

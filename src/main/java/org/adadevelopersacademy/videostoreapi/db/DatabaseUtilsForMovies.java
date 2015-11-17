@@ -36,7 +36,7 @@ public class DatabaseUtilsForMovies {
         if (res != null && res.size() > 0) {
             try {
                 res.next();
-                movie = new Movie.MovieBuilder()
+                movie = Movie.getBuilder()
                         .id(res.getInt("id"))
                         .title(res.getString("title"))
                         .overview(res.getString("overview"))
@@ -64,7 +64,7 @@ public class DatabaseUtilsForMovies {
         if (res != null && res.size() > 0) {
             try {
                 res.next();
-                movie = new Movie.MovieBuilder()
+                movie = Movie.getBuilder()
                         .id(res.getInt("id"))
                         .title(res.getString("title"))
                         .overview(res.getString("overview"))
@@ -87,7 +87,7 @@ public class DatabaseUtilsForMovies {
         if (res != null && res.size() > 0) {
             try {
                 while (res.next()) {
-                    final Movie movie = new Movie.MovieBuilder()
+                    final Movie movie = Movie.getBuilder()
                             .id(res.getInt("id"))
                             .title(res.getString("title"))
                             .overview(res.getString("overview"))
