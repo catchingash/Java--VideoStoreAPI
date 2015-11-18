@@ -32,8 +32,7 @@ public class MoviesSetup {
             final List<Map<String, Object>> movieList =
                     mapper.readValue(
                             new File("./src/main/java/org/adadevelopersacademy/videostoreapi/db/seeds/movies.json"),
-                            List.class
-                    );
+                            List.class);
 
             for (Map<String, Object> movieData : movieList) {
                 Map<String, Object> params = new HashMap<String, Object>();
@@ -42,7 +41,7 @@ public class MoviesSetup {
                 params.put("releaseDate", movieData.get("release_date"));
                 params.put("inventory", movieData.get("inventory"));
 
-                DatabaseUtilsForMovies.create(params);
+                MoviesDB.create(params);
             }
         } catch (Exception e) {
             // handle errors for Class.forName

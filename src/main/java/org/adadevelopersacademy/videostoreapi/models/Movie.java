@@ -49,27 +49,32 @@ public class Movie {
 
         public MovieBuilder() {}
 
-        public MovieBuilder id(final int id) {
+        public MovieBuilder id(
+                final int id) {
             this.id = id;
             return this;
         }
 
-        public MovieBuilder title(final String title) {
+        public MovieBuilder title(
+                final String title) {
             this.title = title;
             return this;
         }
 
-        public MovieBuilder overview(final String overview) {
+        public MovieBuilder overview(
+                final String overview) {
             this.overview = overview;
             return this;
         }
 
-        public MovieBuilder releaseDate(final String releaseDate) {
+        public MovieBuilder releaseDate(
+                final String releaseDate) {
             this.releaseDate = releaseDate;
             return this;
         }
 
-        public MovieBuilder inventory(final int inventory) {
+        public MovieBuilder inventory(
+                final int inventory) {
             this.inventory = inventory;
             return this;
         }

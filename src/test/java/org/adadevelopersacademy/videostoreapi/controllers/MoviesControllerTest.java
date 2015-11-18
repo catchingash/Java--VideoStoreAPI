@@ -4,9 +4,8 @@ import org.junit.Test;
 
 public class MoviesControllerTest {
     @Test
-    public void thisIsWhatAControllerUnitTestWouldLookLike() {
-//        MoviesController moviesController = new MoviesController();
-//        moviesController.show("Title");
-//        // test something!
+    public void iJustWantToSeeMyMovies() {
+        MoviesController moviesController = new MoviesController();
+        System.out.println(moviesController.index());
     }
 }

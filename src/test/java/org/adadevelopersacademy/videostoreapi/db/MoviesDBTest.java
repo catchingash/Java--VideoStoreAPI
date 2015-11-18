@@ -16,7 +16,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
-public class DatabaseUtilsForMoviesTest {
+public class MoviesDBTest {
     private final String title = "IAmTitle";
     private final String overview = "IAmOverview";
     private final String releaseDate = "IAmReleaseDate";
@@ -46,37 +46,37 @@ public class DatabaseUtilsForMoviesTest {
     @Test
     @Rollback // FIXME: this isn't doing what I'd hoped. Why?
     public void testCreateAddsNewRecord() {
-        DatabaseUtilsForMovies.create(movieParams());
+        MoviesDB.create(movieParams());
         CachedRowSet movies = DB.executeQuery("SELECT * from movies", null, null);
         assertThat(movies.size(), is(1));
     }
 
     @Test
     @Rollback
-    public void testFindByIdReturnsMovie() {
-        DatabaseUtilsForMovies.create(movieParams());
-        assertThat(DatabaseUtilsForMovies.findByID(1), instanceOf(Movie.class));
-        assertThat(DatabaseUtilsForMovies.findByID(1).getTitle(), is(title));
+    public void testFindByIDReturnsMovie() {
+        MoviesDB.create(movieParams());
+        assertThat(MoviesDB.findBy("id", 1), instanceOf(Movie.class));
+        assertThat(MoviesDB.findBy("id", 1).getTitle(), is(title));
     }
 
     @Test
     @Rollback
     public void testFindByIdReturnsNullIfCantFindMovie() {
-        assertNull(DatabaseUtilsForMovies.findByID(1));
+        assertNull(MoviesDB.findBy("id", 1));
     }
 
     @Test
     @Rollback
     public void testFindByTitleReturnsMovie() {
-        DatabaseUtilsForMovies.create(movieParams());
-        assertThat(DatabaseUtilsForMovies.findByTitle(title), instanceOf(Movie.class));
-        assertThat(DatabaseUtilsForMovies.findByTitle(title).getTitle(), is(title));
+        MoviesDB.create(movieParams());
+        assertThat(MoviesDB.findBy("title", title), instanceOf(Movie.class));
+        assertThat(MoviesDB.findBy("title", title).getTitle(), is(title));
     }
 
     @Test
     @Rollback
     public void testFindByTitleReturnsNullIfCantFindMovie() {
-        assertNull(DatabaseUtilsForMovies.findByTitle("IAmNotATitle"));
+        assertNull(MoviesDB.findBy("title", "IAmNotATitle"));
     }
 
     @Test
@@ -85,17 +85,17 @@ public class DatabaseUtilsForMoviesTest {
         int count = 3;
 
         for (int i = 0; i < count; i++) {
-            DatabaseUtilsForMovies.create(movieParams());
+            MoviesDB.create(movieParams());
         }
 
-        assertThat(DatabaseUtilsForMovies.all().size(), is(count));
-        assertThat(DatabaseUtilsForMovies.all().get(0), instanceOf(Movie.class));
+        assertThat(MoviesDB.all().size(), is(count));
+        assertThat(MoviesDB.all().get(0), instanceOf(Movie.class));
     }
 
     @Test
     @Rollback
     public void testAllReturnsEmptyListIfNoMovies() {
-        assertThat(DatabaseUtilsForMovies.all(), instanceOf(List.class));
-        assertThat(DatabaseUtilsForMovies.all().size(), is(0));
+        assertThat(MoviesDB.all(), instanceOf(List.class));
+        assertThat(MoviesDB.all().size(), is(0));
     }
 }

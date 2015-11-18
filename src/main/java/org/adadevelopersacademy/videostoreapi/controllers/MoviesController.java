@@ -1,6 +1,6 @@
 package org.adadevelopersacademy.videostoreapi.controllers;
 
-import org.adadevelopersacademy.videostoreapi.db.DatabaseUtilsForMovies;
+import org.adadevelopersacademy.videostoreapi.db.MoviesDB;
 import org.adadevelopersacademy.videostoreapi.models.Movie;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,15 +16,13 @@ import java.util.List;
 public class MoviesController {
     @RequestMapping("/{title}")
     public @ResponseBody Movie show(
-            @PathVariable final String title
-    ) {
+            @PathVariable final String title) {
         // returns an empty(?) response if movie was not found
-        return DatabaseUtilsForMovies.findByTitle(title);
+        return MoviesDB.findBy("title", title);
     }
 
     @RequestMapping("/index")
-    public @ResponseBody List<Movie> index(
-    ) {
-        return DatabaseUtilsForMovies.all();
+    public @ResponseBody List<Movie> index() {
+        return MoviesDB.all();
     }
 }
